@@ -1,6 +1,6 @@
 import React from "react";
 
-function Task({ task, category, filteredTasks }) {
+function Task({ task, category, onDelete }) {
   
   
   
@@ -8,7 +8,7 @@ function Task({ task, category, filteredTasks }) {
     <div className="task">
       <div className="label">{category}</div>
       <div className="text">{task}</div>
-      <button onClick={() => filteredTasks(task)} className="delete">X</button>
+      <button onClick={onDelete} className="delete">X</button>
     </div>
   );
 }

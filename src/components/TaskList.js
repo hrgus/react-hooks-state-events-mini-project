@@ -3,32 +3,44 @@ import React, { useState } from "react";
 import Task from "./Task";
 
 function TaskList({ tasks, categories }) {
-  const [selectedCategory, setSelectedCategory] = useState("ALL")
-  // const [task, setTask] = useState(TASKS);
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const [task, setTask] = useState(tasks);
+    
+    
+    function handlecategoryChange(e) {
+      setSelectedCategory(e.target.value);
+    }
+    
+    const tasksToDisplay = tasks.filter((task) => {
+      if(selectedCategory === "ALL") return true;
+      
+      return task.category === selectedCategory
+    })
+    
+    const filteredTasks = tasksToDisplay.filter((task) => {
+      return task.text.includes(tasks);
+    })
+    
+    function onDelete(e) {
+      const newTaskList = [...tasksToDisplay.filter(()=> {
+        
+      })]
 
+      
+    }
 
-  function handlecategoryChange(e) {
-    setSelectedCategory(e.target.value);
-  }
-
-  const tasksToDisplay = tasks.filter((task) => {
-    if(selectedCategory === "ALL") return true;
-
-    return task.category === selectedCategory
-  })
-
-  const filteredTasks = tasksToDisplay.filter((task) => {
-    return task.text.includes(tasks);
-  })
+    // const onDelete = tasksToDisplay.filter((e) => {
+    //   console.log(task)
+    // })
 
   return (
     <div className="tasks">
-      {filteredTasks.map((task, index) => (
+      {tasksToDisplay.map((task, index) => (
         <Task 
           key={index}
           task={task.text}
           category={task.category}
-          deleteTask={filteredTasks}
+          onDelete={onDelete}
         />
       ))}
 
